@@ -11,9 +11,9 @@ export function MyPosts() {
             <button>Remove</button>
         </div>
         <div className={m.posts}>
-            <Post message={'Hi'}/>
-            <Post message={'Bye'}/>
-            <Post message={'How old are you?'}/>
+            <Post message={'Hi'} likeCounter={6}/>
+            <Post message={'Bye'} likeCounter={7}/>
+            <Post message={'How old are you?'} likeCounter={10}/>
         </div>
     </div>;
 }
