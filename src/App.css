@@ -1,0 +1,28 @@
+.app-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.header{
+    background-color: aquamarine;
+    width: 1600px;
+    height: 100px;
+}
+
+.site-logo{
+    width: 50px;
+}
+
+.nav{
+    background-color: coral;
+    width: 300px;
+}
+
+.content{
+    background-color: mediumorchid;
+    width: 1300px;
+}
+
+.profile-page-img{
+    width: 700px;
+}
