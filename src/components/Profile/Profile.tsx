@@ -1,10 +1,11 @@
 import React from "react";
-
+import p from './Profile.module.css'
 export function Profile() {
-    return <div className={"content"}>
+    return (
+        <div className={p.content}>
         <div>
             <img src="https://gamemag.ru/images/cache/Reviews/Reviews1726/92f0dfdd74-2_1390x600.jpg"
-                 className={"profile-page-img"} alt=""/>
+                 className={p.profilePageImg} alt=""/>
         </div>
         <div>Ava + description</div>
         <div>
@@ -19,5 +20,6 @@ export function Profile() {
                 post 2
             </div>
         </div>
-    </div>;
+    </div>
+    )
 }
