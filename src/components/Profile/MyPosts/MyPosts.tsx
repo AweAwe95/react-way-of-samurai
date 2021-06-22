@@ -10,6 +10,7 @@ export function MyPosts() {
         {message:'How old are you?', likes: 10},
     ]
 
+    const postElements = postData.map(p => <Post message={p.message} likeCounter={p.likes}/>)
 
     return <div>
         My posts
@@ -19,9 +20,7 @@ export function MyPosts() {
             <button>Remove</button>
         </div>
         <div className={m.posts}>
-            <Post message={postData[0].message} likeCounter={postData[0].likes}/>
-            <Post message={postData[1].message} likeCounter={postData[1].likes}/>
-            <Post message={postData[2].message} likeCounter={postData[2].likes}/>
+            {postElements}
         </div>
     </div>;
 }
