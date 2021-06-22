@@ -1,4 +1,5 @@
 .dialogs{
+    display: flex;
     background-color: peachpuff;
-    width: 1300px;
+    justify-content: space-around;
 }
