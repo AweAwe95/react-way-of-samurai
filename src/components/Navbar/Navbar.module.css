@@ -2,3 +2,13 @@
     background-color: coral;
     width: 300px;
 }
+
+.nav a{
+    text-decoration: none;
+    color: #7c0029;
+}
+
+
+.activeLink{
+    font-size: 30px;
+}
