@@ -21,6 +21,7 @@ type MessageType = {
 
 export type ProfilePageType = {
     posts: PostType[]
+    newPostText: string
 }
 
 export type PostType = {
@@ -48,7 +49,8 @@ export const state:StateType = {
             {message: 'Hi', likes: 6},
             {message: 'Bye', likes: 7},
             {message: 'How old are you?', likes: 10},
-        ]
+        ],
+        newPostText: ''
     }
 }
 
@@ -59,5 +61,10 @@ export let addPost = (postMessage: string) => {
         likes: 0
     }
     state.profilePage.posts.push(newPost);
+    rerenderEntireTree(state)
+}
+
+export let changeNewText=(postText: string) => {
+    state.profilePage.newPostText = postText
     rerenderEntireTree(state)
 }

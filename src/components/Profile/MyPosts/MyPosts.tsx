@@ -5,25 +5,25 @@ import {PostType} from "../../../redux/state";
 
 type MyPostsTypes = {
     posts: PostType[]
+    newPostText: string
     addPost: (postMessage: string) => void
+    changeNewText:(postText: string) => void
 }
 
 export function MyPosts(props: MyPostsTypes) {
 
     const postElements = props.posts.map(p => <Post message={p.message} likeCounter={p.likes}/>)
 
-
     const addPost = () => {
-        props.addPost(textareaValue)
+        props.addPost(props.newPostText)
+
     }
-    const [textareaValue, setTextareaValue] = useState<string>('')
 
     return <div>
         My posts
         <div>
-            <textarea onChange={e => setTextareaValue(e.currentTarget.value)} value={textareaValue}></textarea>
+            <textarea value={props.newPostText} onChange={e => props.changeNewText(e.currentTarget.value)}></textarea>
             <button onClick={addPost}>Add post</button>
-            <button>Remove</button>
         </div>
         <div className={m.posts}>
             {postElements}
