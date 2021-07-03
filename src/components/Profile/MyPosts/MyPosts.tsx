@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import m from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {PostType} from "../../../redux/state";

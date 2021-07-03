@@ -15,6 +15,8 @@ type AppType = {
     state: StateType
     addPost: (postMessage: string) => void
     changeNewText:(postText: string) => void
+    addMessage:(newMessage: string)=>void
+    changeNewMessage:(message: string)=>void
 }
 
 function App(props: AppType) {
@@ -26,7 +28,7 @@ function App(props: AppType) {
             <Navbar/>
             <div className={'app-wrapper-content'}>
                 <Route path={'/profile'} render={() => <Profile profilePage = {props.state.profilePage} addPost={props.addPost} changeNewText={props.changeNewText} />}/>
-                <Route path={'/dialogs'} render={() => <Dialogs dialogs={props.state.messagesPage.dialogs} messages={props.state.messagesPage.messages}/>}/>
+                <Route path={'/dialogs'} render={() => <Dialogs dialogs={props.state.messagesPage.dialogs} messages={props.state.messagesPage.messages} newMessageText={props.state.messagesPage.newMessageText} addMessage={props.addMessage} changeNewMessage={props.changeNewMessage}/>}/>
                 <Route path={'/news'} component={News}/>
                 <Route path={'/music'} component={Music}/>
                 <Route path={'/settings'} component={Settings}/>
