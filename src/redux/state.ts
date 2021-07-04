@@ -1,5 +1,29 @@
 import {v1} from "uuid";
 
+type StoreType = {
+    _state: StateType
+    _callSubscriber:(state: StateType)=>void
+    getState: () => StateType
+    subscribe: (observer: any) => void
+    dispatch:(action: ActionsType) => void
+}
+export type ActionsType = AddPostActionType | ChangePostTextActionType | AddMessageActionType | ChangeMessageTextActionType
+
+type AddPostActionType ={
+    type: 'ADD-POST'
+}
+type ChangePostTextActionType={
+    type: 'CHANGE-POST-TEXT'
+    postText: string
+}
+type AddMessageActionType ={
+    type: 'ADD-MESSAGE'
+}
+type ChangeMessageTextActionType={
+    type: 'CHANGE-MESSAGE-TEXT'
+    newMessage: string
+}
+
 export type StateType = {
     messagesPage: MessagesPageType
     profilePage: ProfilePageType
@@ -26,8 +50,8 @@ export type PostType = {
     likes: number
 }
 
-export let store ={
-    _state:{
+export let store: StoreType = {
+    _state: {
         messagesPage: {
             dialogs: [
                 {id: v1(), name: 'Vitali'},
@@ -52,38 +76,69 @@ export let store ={
             newPostText: ''
         }
     },
-    getState(){
-        return this._state
-    },
     _callSubscriber(state: StateType) {
         console.log("state changed")
     },
-    addPost(postMessage: string) {
-        let newPost = {
-            message: postMessage,
-            likes: 0
-        }
-        this._state.profilePage.posts.push(newPost);
-        this._callSubscriber(this._state)
+
+    getState() {
+        return this._state
     },
-    changeNewText(postText: string){
-        this._state.profilePage.newPostText = postText
-        this._callSubscriber(this._state)
-    },
-    changeNewMessage(newMessage: string){
-        this._state.messagesPage.newMessageText = newMessage
-        this._callSubscriber(this._state)
-    },
-    addMessage(message: string){
-        let newMessage = {
-            id: v1(),
-            message: message
-        }
-        this._state.messagesPage.messages.push(newMessage)
-        this._callSubscriber(this._state)
-    },
-    subscribe(observer: any){
+    subscribe(observer: any) {
         this._callSubscriber = observer
+    },
+
+
+    // addPost() {
+    //     let newPost = {
+    //         message: this._state.profilePage.newPostText,
+    //         likes: 0
+    //     }
+    //     this._state.profilePage.posts.push(newPost);
+    //     this._callSubscriber(this._state)
+    // },
+    // changePostText(postText: string) {
+    //     this._state.profilePage.newPostText = postText
+    //     this._callSubscriber(this._state)
+    // },
+    // addMessage() {
+    //     let newMessage = {
+    //         id: v1(),
+    //         message: this._state.messagesPage.newMessageText
+    //     }
+    //     this._state.messagesPage.messages.push(newMessage)
+    //     this._callSubscriber(this._state)
+    // },
+    // changeNewMessage(newMessage: string) {
+    //     this._state.messagesPage.newMessageText = newMessage
+    //     this._callSubscriber(this._state)
+    // },
+    dispatch(action) {
+        switch (action.type) {
+            case 'ADD-POST':
+                let newPost = {
+                    message: this._state.profilePage.newPostText,
+                    likes: 0
+                }
+                this._state.profilePage.posts.push(newPost);
+                this._callSubscriber(this._state)
+                break
+            case 'CHANGE-POST-TEXT':
+                this._state.profilePage.newPostText = action.postText
+                this._callSubscriber(this._state)
+                break
+            case 'ADD-MESSAGE':
+                let newMessage = {
+                    id: v1(),
+                    message: this._state.messagesPage.newMessageText
+                }
+                this._state.messagesPage.messages.push(newMessage)
+                this._callSubscriber(this._state)
+                break
+            case 'CHANGE-MESSAGE-TEXT':
+                this._state.messagesPage.newMessageText = action.newMessage
+                this._callSubscriber(this._state)
+                break
+        }
     }
 }
 
