@@ -16,6 +16,7 @@ type ChangePostTextActionType={
     type: 'CHANGE-POST-TEXT'
     postText: string
 }
+
 type AddMessageActionType ={
     type: 'ADD-MESSAGE'
 }
@@ -23,6 +24,19 @@ type ChangeMessageTextActionType={
     type: 'CHANGE-MESSAGE-TEXT'
     newMessage: string
 }
+export const addPostAction = ():AddPostActionType => {
+    return {type:'ADD-POST'}
+}
+export const ChangePostTextAction = (newPostText: string):ChangePostTextActionType => {
+    return {type:'CHANGE-POST-TEXT', postText: newPostText}
+}
+export const AddMessageAction = ():AddMessageActionType => {
+    return {type:'ADD-MESSAGE'}
+}
+export const ChangeMessageTextAction = (newMessageText: string):ChangeMessageTextActionType => {
+    return {type:'CHANGE-MESSAGE-TEXT', newMessage: newMessageText}
+}
+
 
 export type StateType = {
     messagesPage: MessagesPageType

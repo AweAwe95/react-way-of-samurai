@@ -2,7 +2,7 @@ import React from "react";
 import d from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionsType, DialogType, MessageType} from "../../redux/state";
+import {ActionsType, AddMessageAction, ChangeMessageTextAction, DialogType, MessageType} from "../../redux/state";
 
 
 type DialogsPageType = {
@@ -24,8 +24,8 @@ export function Dialogs(props: DialogsPageType) {
             </div>
             <div className={d.messages}>
                 {messagesElements}
-                <input type="text" onChange={(e)=>props.dispatch({type:'CHANGE-MESSAGE-TEXT', newMessage: e.currentTarget.value})} value={props.newMessageText}/>
-                <button onClick={()=>props.dispatch({type:'ADD-MESSAGE'})}>Отправить</button>
+                <input type="text" onChange={(e)=>props.dispatch(ChangeMessageTextAction(e.currentTarget.value))} value={props.newMessageText}/>
+                <button onClick={()=>props.dispatch(AddMessageAction())}>Отправить</button>
             </div>
         </div>
     )
