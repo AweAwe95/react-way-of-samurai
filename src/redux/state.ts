@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
 
 type StoreType = {
     _state: StateType
@@ -93,7 +95,6 @@ export let store: StoreType = {
     _callSubscriber(state: StateType) {
         console.log("state changed")
     },
-
     getState() {
         return this._state
     },
@@ -127,32 +128,9 @@ export let store: StoreType = {
     //     this._callSubscriber(this._state)
     // },
     dispatch(action) {
-        switch (action.type) {
-            case 'ADD-POST':
-                let newPost = {
-                    message: this._state.profilePage.newPostText,
-                    likes: 0
-                }
-                this._state.profilePage.posts.push(newPost);
-                this._callSubscriber(this._state)
-                break
-            case 'CHANGE-POST-TEXT':
-                this._state.profilePage.newPostText = action.postText
-                this._callSubscriber(this._state)
-                break
-            case 'ADD-MESSAGE':
-                let newMessage = {
-                    id: v1(),
-                    message: this._state.messagesPage.newMessageText
-                }
-                this._state.messagesPage.messages.push(newMessage)
-                this._callSubscriber(this._state)
-                break
-            case 'CHANGE-MESSAGE-TEXT':
-                this._state.messagesPage.newMessageText = action.newMessage
-                this._callSubscriber(this._state)
-                break
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
+        this._callSubscriber(this._state)
     }
 }
 
