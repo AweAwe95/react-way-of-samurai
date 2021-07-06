@@ -1,6 +1,15 @@
-import {v1} from "uuid";
+let initialState = {
+    posts: [
+        {message: 'Hi', likes: 6},
+        {message: 'Bye', likes: 7},
+        {message: 'How old are you?', likes: 10},
+    ],
+    newPostText: ''
+}
 
-export const profileReducer = (state: any,action: any) => {
+
+
+export const profileReducer = (state = initialState,action: any) => {
     switch (action.type) {
         case 'ADD-POST':
             let newPost = {
@@ -8,10 +17,12 @@ export const profileReducer = (state: any,action: any) => {
                 likes: 0
             }
             state.posts.push(newPost);
-            break
+            return state
         case 'CHANGE-POST-TEXT':
             state.newPostText = action.postText
-            break
+            return state
+
+        default:
+            return state
     }
-    return state
 }

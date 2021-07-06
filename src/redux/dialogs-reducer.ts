@@ -1,6 +1,22 @@
 import {v1} from "uuid";
 
-export const dialogsReducer = (state: any,action: any) => {
+let initialState = {
+    dialogs: [
+        {id: v1(), name: 'Vitali'},
+        {id: v1(), name: 'Denis'},
+        {id: v1(), name: 'Viktor'},
+        {id: v1(), name: 'Valera'}
+    ],
+    messages: [
+        {id: v1(), message: 'Hi'},
+        {id: v1(), message: 'How are you'},
+        {id: v1(), message: 'Really'},
+        {id: v1(), message: 'Bye'},
+    ],
+    newMessageText: ""
+}
+
+export const dialogsReducer = (state = initialState,action: any) => {
     switch (action.type) {
         case 'ADD-MESSAGE':
             let newMessage = {
@@ -8,10 +24,11 @@ export const dialogsReducer = (state: any,action: any) => {
                 message: state.newMessageText
             }
             state.messages.push(newMessage)
-            break
+            return state
         case 'CHANGE-MESSAGE-TEXT':
             state.newMessageText = action.newMessage
-            break
+            return state
+        default:
+            return state
     }
-    return state
 }

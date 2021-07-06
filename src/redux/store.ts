@@ -4,39 +4,43 @@ import {dialogsReducer} from "./dialogs-reducer";
 
 type StoreType = {
     _state: StateType
-    _callSubscriber:(state: StateType)=>void
+    _callSubscriber: (state: StateType) => void
     getState: () => StateType
     subscribe: (observer: any) => void
-    dispatch:(action: ActionsType) => void
+    dispatch: (action: ActionsType) => void
 }
-export type ActionsType = AddPostActionType | ChangePostTextActionType | AddMessageActionType | ChangeMessageTextActionType
+export type ActionsType =
+    AddPostActionType
+    | ChangePostTextActionType
+    | AddMessageActionType
+    | ChangeMessageTextActionType
 
-type AddPostActionType ={
+type AddPostActionType = {
     type: 'ADD-POST'
 }
-type ChangePostTextActionType={
+type ChangePostTextActionType = {
     type: 'CHANGE-POST-TEXT'
     postText: string
 }
 
-type AddMessageActionType ={
+type AddMessageActionType = {
     type: 'ADD-MESSAGE'
 }
-type ChangeMessageTextActionType={
+type ChangeMessageTextActionType = {
     type: 'CHANGE-MESSAGE-TEXT'
     newMessage: string
 }
-export const addPostAction = ():AddPostActionType => {
-    return {type:'ADD-POST'}
+export const addPostAction = (): AddPostActionType => {
+    return {type: 'ADD-POST'}
 }
-export const ChangePostTextAction = (newPostText: string):ChangePostTextActionType => {
-    return {type:'CHANGE-POST-TEXT', postText: newPostText}
+export const ChangePostTextAction = (newPostText: string): ChangePostTextActionType => {
+    return {type: 'CHANGE-POST-TEXT', postText: newPostText}
 }
-export const AddMessageAction = ():AddMessageActionType => {
-    return {type:'ADD-MESSAGE'}
+export const AddMessageAction = (): AddMessageActionType => {
+    return {type: 'ADD-MESSAGE'}
 }
-export const ChangeMessageTextAction = (newMessageText: string):ChangeMessageTextActionType => {
-    return {type:'CHANGE-MESSAGE-TEXT', newMessage: newMessageText}
+export const ChangeMessageTextAction = (newMessageText: string): ChangeMessageTextActionType => {
+    return {type: 'CHANGE-MESSAGE-TEXT', newMessage: newMessageText}
 }
 
 
