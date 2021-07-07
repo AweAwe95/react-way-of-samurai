@@ -9,13 +9,18 @@ type DialogsPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
     newMessageText: string
-    dispatch: (action: ActionsType) => void
+    onAddMessage: () => void
+    onMessageChange: (newText: string) => void
 }
 
 export function Dialogs(props: DialogsPageType) {
 
-    const dialogsElements = props.dialogs.map( d => <DialogItem name={d.name} id={d.id}/> )
-    const messagesElements = props.messages.map( m => <Message message={m.message}/>)
+    const dialogsElements = props.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+    const messagesElements = props.messages.map(m => <Message message={m.message}/>)
+
+    const onMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        props.onMessageChange(e.currentTarget.value)
+    }
 
     return (
         <div className={d.dialogs}>
@@ -24,8 +29,9 @@ export function Dialogs(props: DialogsPageType) {
             </div>
             <div className={d.messages}>
                 {messagesElements}
-                <input type="text" onChange={(e)=>props.dispatch(ChangeMessageTextAction(e.currentTarget.value))} value={props.newMessageText}/>
-                <button onClick={()=>props.dispatch(AddMessageAction())}>Отправить</button>
+                <textarea onChange={onMessageChange}
+                       value={props.newMessageText}/>
+                <button onClick={props.onAddMessage}>Отправить</button>
             </div>
         </div>
     )

@@ -6,23 +6,28 @@ import {ActionsType, addPostAction, ChangePostTextAction, PostType} from "../../
 type MyPostsTypes = {
     posts: PostType[]
     newPostText: string
-    dispatch: (action: ActionsType) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 export function MyPosts(props: MyPostsTypes) {
 
     const postElements = props.posts.map(p => <Post message={p.message} likeCounter={p.likes}/>)
 
-    const addPost = () => {
-        props.dispatch(addPostAction())
-
+    const onAddPost = () => {
+        props.addPost()
+        //props.dispatch(addPostAction())
+    }
+    const onPostChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostText(e.currentTarget.value)
     }
 
     return <div>
         My posts
         <div>
-            <textarea value={props.newPostText} onChange={e => props.dispatch(ChangePostTextAction(e.currentTarget.value))}></textarea>
-            <button onClick={addPost}>Add post</button>
+            <textarea value={props.newPostText} onChange={onPostChange}></textarea>
+            {/*onChange={e => props.dispatch(ChangePostTextAction(e.currentTarget.value))*/}
+            <button onClick={onAddPost}>Add post</button>
         </div>
         <div className={m.posts}>
             {postElements}
