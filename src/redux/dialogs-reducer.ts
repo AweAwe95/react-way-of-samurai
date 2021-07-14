@@ -1,5 +1,21 @@
 import {v1} from "uuid";
 
+type AddMessageActionType = {
+    type: 'ADD-MESSAGE'
+}
+type ChangeMessageTextActionType = {
+    type: 'CHANGE-MESSAGE-TEXT'
+    newMessage: string
+}
+
+export const AddMessageAction = (): AddMessageActionType => {
+    return {type: 'ADD-MESSAGE'}
+}
+export const ChangeMessageTextAction = (newMessageText: string): ChangeMessageTextActionType => {
+    return {type: 'CHANGE-MESSAGE-TEXT', newMessage: newMessageText}
+}
+
+
 let initialState = {
     dialogs: [
         {id: v1(), name: 'Vitali'},

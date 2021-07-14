@@ -1,23 +1,7 @@
-import React from "react";
-import m from "./MyPosts.module.css"
-import {Post} from "./Post/Post";
-import {
-    ActionsType,
-    AddMessageAction,
-    addPostAction,
-    ChangeMessageTextAction,
-    ChangePostTextAction,
-    PostType
-} from "../../../redux/store";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
-import {Dialogs} from "../../Dialogs/Dialogs";
+import {addPostAction, ChangePostTextAction} from "../../../redux/profile-reducer";
 
-type MyPostsTypes = {
-    posts: PostType[]
-    newPostText: string
-    dispatch: (action: ActionsType) => void
-}
 
 let mapStateToProps = (state: any) => {
     return {
