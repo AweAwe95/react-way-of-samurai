@@ -18,7 +18,7 @@ type AppType = {
     dispatch:(action: ActionsType) => void
 }
 
-function App(props: AppType) {
+function App() {
 
     return (
         <BrowserRouter>
@@ -26,15 +26,10 @@ function App(props: AppType) {
             <Header/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
-                <Route path={'/profile'} render={() => <Profile
-                    profilePage = {props.state.profilePage}
-                    dispatch={props.dispatch} />}
-                />
-                <Route path={'/dialogs'} render={() => <DialogsContainer
-                    dialogs={props.state.messagesPage.dialogs}
-                    messages={props.state.messagesPage.messages}
-                    newMessageText={props.state.messagesPage.newMessageText}
-                    dispatch={props.dispatch}/>}/>
+                <Route path={'/profile'}
+                       render={() => <Profile/>}/>
+                <Route path={'/dialogs'}
+                       render={() => <DialogsContainer/>}/>
                 <Route path={'/news'} component={News}/>
                 <Route path={'/music'} component={Music}/>
                 <Route path={'/settings'} component={Settings}/>
