@@ -1,59 +1,34 @@
 import React from "react";
 import q from './Users.module.css'
-
-type LocationType = {
-    country: string,
-    city: string
-}
+import axios from "axios";
 
 type UserType = {
-    id: string,
-    photoUrl: string,
-    followed: boolean,
-    fullName: string,
+    id: number,
+    name: string,
     status: string,
-    location: LocationType
+    photos: PhotosType,
+    followed: boolean
+}
+type PhotosType = {
+    small: string,
+    large: string
 }
 
 type UsersPageType = {
     users: UserType[]
-    follow: (userId: string) => void
-    unfollow: (userId: string) => void
-    setUsers: (users: any) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    setUsers: (users: UserType[]) => void
 }
 
 export function Users(props: UsersPageType) {
     if (props.users.length === 0) {
-        props.setUsers([{
-            id: '1',
-            photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSenb8_kedNWkKXpNIvnbZU6UDywBXe0bKtEQ&usqp=CAU',
-            followed: true,
-            fullName: 'Vitali Karach',
-            status: 'im looking for a job',
-            location: {country: 'Belarus', city: 'Minsk'}
-        },
-            {
-                id: '2',
-                photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSenb8_kedNWkKXpNIvnbZU6UDywBXe0bKtEQ&usqp=CAU',
-                followed: false,
-                fullName: 'Denis Zubr',
-                status: 'im studying',
-                location: {
-                    country: 'Poland',
-                    city: 'Katowice'
-                }
-            },
-            {
-                id: '3',
-                photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSenb8_kedNWkKXpNIvnbZU6UDywBXe0bKtEQ&usqp=CAU',
-                followed: true,
-                fullName: 'Jurek Mih',
-                status: 'im working in IT',
-                location: {
-                    country: 'Russia',
-                    city: 'Moscow'
-                }
-            }])
+
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then( response => {
+            debugger
+            props.setUsers(response.data.items)
+        });
+
     }
 
     return (
@@ -61,11 +36,12 @@ export function Users(props: UsersPageType) {
             {props.users.map(u => <div>
                 <span>
                     <div className={q.item}>
-                        <img src={u.photoUrl} alt=""/>
+                        <img src={u.photos.small != null ? u.photos.small : "https://static.wikia.nocookie.net/drebedenboi/images/5/5c/%D0%9F%D0%B0%D1%85%D0%BE%D0%BC2.jpg/revision/latest?cb=20180314173639&path-prefix=ru"} alt=""/>
                     </div>
                     <div>
                         {u.followed
                             ? <button onClick={() => {
+
                                 props.unfollow(u.id)
                             }}>Follow</button>
                             : <button onClick={() => {
@@ -75,12 +51,12 @@ export function Users(props: UsersPageType) {
                 </span>
                     <span>
                     <span>
-                        <div>{u.fullName}</div>
+                        <div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
                     <span>
-                        <div>{u.location.country}</div>
-                        <div>{u.location.city}</div>
+                        <div>{"u.location.country"}</div>
+                        <div>{"u.location.city"}</div>
                     </span>
                 </span>
                 </div>
